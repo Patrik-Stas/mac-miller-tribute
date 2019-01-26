@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Grid } from 'semantic-ui-react';
-import YouTube from 'react-youtube';
-import AlbumSection from './components/AlbumSection';
+import AlbumSection from './components/album-section';
+import './main.css';
+import TributePlayer from './components/tribute-player';
 
 // const imgMacMain = require('images/MacMain.jpg');
 const imgBde = require('images/bde.jpg');
@@ -43,50 +44,68 @@ const albums = {
   mackin: [imgMacin],
 };
 
-function renderSection(albumId, index) {
-  const sectionImg = albums[albumId][0];
-  return (
-    <Grid.Row key={`${albumId}-row`} style={{ minHeight: 400 }}>
-      <AlbumSection
-        key={`${albumId}-album`}
-        sectionImg={sectionImg}
-        title={art[albumId].name}
-        songList={art[albumId].content}
-        songsOnLeft={index % 2 === 0}
-      />
-    </Grid.Row>
-  );
-}
-
 class Main extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      playingWatchId: '3ADKdqcdNqs',
+      playingAlbum: '-',
+      playingSong: '-',
+      playingReleaseYear: '-',
+    };
+  }
+
+  setPlayerSong = (
+    playingWatchId,
+    playingAlbum,
+    playingSong,
+    playingReleaseYear,
+  ) => {
+    this.setState({ playingWatchId });
+    this.setState({ playingAlbum });
+    this.setState({ playingSong });
+    this.setState({ playingReleaseYear: playingReleaseYear || 'Unknown' });
+  };
+
+  renderSection = (albumId, index) => {
+    const sectionImg = albums[albumId][0];
+    return (
+      <Grid.Row key={`${albumId}-row`} style={{ minHeight: 400 }}>
+        <AlbumSection
+          key={`${albumId}-album`}
+          sectionImg={sectionImg}
+          album={art[albumId].name}
+          year={art[albumId].release_year}
+          songList={art[albumId].content}
+          songsOnLeft={index % 2 === 0}
+          type={art[albumId].type}
+          handleSongClick={this.setPlayerSong}
+        />
+      </Grid.Row>
+    );
   }
 
   render() {
-    const opts = {
-      height: '180',
-      width: '240',
-    };
+    const {
+      playingWatchId,
+      playingAlbum,
+      playingSong,
+      playingReleaseYear,
+    } = this.state;
     const albumSections = (
       <div>
-        <YouTube
-          videoId="3ADKdqcdNqs"
-          id="3ADKdqcdNqs"
-          className="videotest"
-          containerClassName="videocontainerclass"
-          opts={opts}
-          // onReady={func}
-          // onPlay={func}
-          // onPause={func}
-          // onEnd={func}
-          // onError={func}
-          // onStateChange={func}
-          // onPlaybackRateChange={func}
-          // onPlaybackQualityChange={func}
+        <div className="headertext" style={{ fontSize: 50, marginBottom: 20 }}>
+          <p>The tribute to Malcolm James McCormick</p>
+        </div>
+        <TributePlayer
+          playingWatchId={playingWatchId}
+          playingAlbum={playingAlbum}
+          playingSong={playingSong}
+          playingReleaseYear={playingReleaseYear}
         />
-        <Grid>{Object.keys(albums).map((k, i) => renderSection(k, i))}</Grid>
+        <Grid>
+          {Object.keys(albums).map((k, i) => this.renderSection(k, i))}
+        </Grid>
       </div>
     );
 

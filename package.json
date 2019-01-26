@@ -4,41 +4,9 @@
   "description": "Boilerplate for react and webpack",
   "main": "index.js",
   "scripts": {
+    "serve": "http-server build/ -g -o -p 8081",
     "start": "cross-env NODE_ENV=development webpack-serve --open",
-    "build": "cross-env NODE_ENV=production webpack",
-    "format": "prettier --write 'packages/**/*.js'",
-    "test": "jest --watchAll --coverage",
-    "precommit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,jsx,css,md}": [
-      "prettier --write --single-quote",
-      "eslint --fix",
-      "git add"
-    ]
-  },
-  "jest": {
-    "testEnvironment": "jsdom",
-    "moduleDirectories": [
-      "src",
-      "node_modules"
-    ],
-    "moduleNameMapper": {
-      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js",
-      "\\.(jpg|gif|ttf|eot|svg)$": "<rootDir>/__mocks__/fileMock.js"
-    },
-    "transform": {
-      "^.+\\.(js|jsx)$": "babel-jest",
-      ".+\\.(css|styl|less|sass|scss)$": "<rootDir>/node_modules/jest-css-modules-transform"
-    },
-    "setupTestFrameworkScriptFile": "<rootDir>/setupTests.js",
-    "moduleFileExtensions": [
-      "css",
-      "scss",
-      "js",
-      "json",
-      "jsx"
-    ]
+    "build": "cross-env NODE_ENV=production webpack"s
   },
   "repository": "https://github.com/HashemKhalifa/webpack-react-boilerplate",
   "author": "HashemKhalifa",
@@ -64,7 +32,9 @@
     "babel-core": "7.0.0-bridge.0"
   },
   "devDependencies": {
+    "nodemon": "^1.18.9",
     "@babel/core": "7.1.0",
+    "http-server": "^0.11.1",
     "@babel/plugin-proposal-class-properties": "7.1.0",
     "@babel/plugin-proposal-decorators": "7.1.0",
     "@babel/plugin-proposal-export-namespace-from": "7.0.0",
@@ -82,7 +52,6 @@
     "@babel/runtime": "7.0.0",
     "babel-core": "7.0.0-beta.3",
     "babel-eslint": "9.0.0",
-    "babel-jest": "23.6.0",
     "babel-loader": "8.0.2",
     "babel-plugin-lodash": "3.3.4",
     "browserslist": "4.1.1",
@@ -90,33 +59,22 @@
     "connect-history-api-fallback": "^1.5.0",
     "cross-env": "5.2.0",
     "css-loader": "1.0.0",
-    "enzyme": "3.6.0",
-    "enzyme-adapter-react-16": "1.5.0",
     "eslint": "5.6.0",
     "eslint-config-airbnb": "17.1.0",
-    "eslint-config-prettier": "3.0.1",
     "eslint-loader": "2.1.0",
     "eslint-plugin-import": "2.14.0",
-    "eslint-plugin-jest": "21.22.0",
     "eslint-plugin-jsx-a11y": "6.1.1",
-    "eslint-plugin-prettier": "2.6.2",
     "eslint-plugin-react": "7.11.1",
     "eslint-watch": "4.0.2",
     "file-loader": "2.0.0",
     "html-webpack-plugin": "3.2.0",
     "husky": "0.14.3",
     "identity-obj-proxy": "3.0.0",
-    "jest": "23.6.0",
-    "jest-css-modules-transform": "^2.0.2",
-    "jest-enzyme": "6.0.4",
-    "jest-fetch-mock": "^1.6.6",
     "jsdom": "^12.0.0",
     "koa-connect": "^2.0.1",
     "lint-staged": "7.2.2",
     "mini-css-extract-plugin": "0.4.2",
     "node-sass": "4.9.3",
-    "prettier": "1.14.2",
-    "pretty-quick": "1.6.0",
     "sass-loader": "7.1.0",
     "style-loader": "0.23.0",
     "webpack": "4.19.1",
