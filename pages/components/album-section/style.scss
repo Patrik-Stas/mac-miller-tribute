@@ -1,0 +1,27 @@
+.album-image {
+  height: 300px;
+}
+
+.album-content {
+}
+
+.album-area {
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+  width:100%;
+  height:100%;
+  position: absolute;
+  top: 0px;
+  right: 0;
+
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";       /* IE 8 */
+  filter: alpha(opacity=20);  /* IE 5-7 */
+  -moz-opacity: 0.2;          /* Netscape */
+  -khtml-opacity: 0.2;        /* Safari 1.x */
+  opacity: 0.2;               /* Good browsers */
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
