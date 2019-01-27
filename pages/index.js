@@ -61,36 +61,57 @@ class Main extends Component {
     };
   }
 
-  // playSong = (watchId) => {
-  //   this.state.playerTarget.playVideo()
-  // };
+  findDetailsByWatchId(searchWatchId) {
+    const keys = Object.keys(art);
+    for (let a = 0; a < keys.length; a++) {
+      const album = art[keys[a]];
+      for (let i = 0; i < album.content.length; i++) {
+        if (album.content[i].watchid === searchWatchId) {
+          return { albumName: album.name, songName: album.content[i].song_name };
+        }
+      }
+    }
+    throw Error(`Couldn't find album where WatchID ${searchWatchId} belongs.`);
+  }
 
   setPlayerSong = (
     targetWatchId,
-    playingAlbum,
-    playingSong,
-    playingReleaseYear,
+    autoplay=true
   ) => {
+    console.log(`Setting player target song to ${targetWatchId}`);
     this.setState({ targetWatchId });
-    this.setState({ playingAlbum });
-    this.setState({ playingSong });
-    this.setState({ playingReleaseYear });
+    try {
+      const detail = this.findDetailsByWatchId(targetWatchId);
+      console.log(`Found watchId details: ${JSON.stringify(detail)}`);
+      this.setState({ playingAlbum: detail.albumName });
+      this.setState({ playingSong: detail.songName });
+      this.setState({ autoplay })
+    } catch (err) {
+      console.error(`Couldn't setup details for watchid ${targetWatchId}`);
+      console.error(err);
+      this.setState({ playingAlbum: '-' });
+      this.setState({ playingSong: '-' });
+    }
   };
 
   renderSection = (albumId, index) => {
     const sectionImg = albums[albumId][0];
 
     if (art[albumId].content === undefined) {
-      throw Error(`${JSON.stringify(albumId)}`)
+      throw Error(`${JSON.stringify(albumId)}`);
     }
     return [
-      <Grid.Row key={`${albumId}-name`} style={{ marginTop: "10em"}}>
-        <Grid.Column width={16} >
-          <h1 style={{ fontSize: '3rem'}}>{art[albumId].name}</h1>
+      <Grid.Row key={`${albumId}-name`} style={{ marginTop: '10em' }}>
+        <Grid.Column width={1}>
+          <h3 style={{ fontSize: '2rem' }}>{art[albumId].release_year}</h3>
         </Grid.Column>
+        <Grid.Column style={{ marginLeft: '1rem' }} width={13}>
+          <h1 style={{ fontSize: '3rem' }}>{art[albumId].name}</h1>
+        </Grid.Column>
+
       </Grid.Row>,
 
-      <Grid.Row key={`${albumId}-row`} style={{ minHeight: 600}}>
+      <Grid.Row key={`${albumId}-row`} style={{ minHeight: 600 }}>
         <Grid.Column width={16}>
           <AlbumSection
             key={`${albumId}-album`}
@@ -104,7 +125,7 @@ class Main extends Component {
             handleSongClick={this.setPlayerSong}
           />
         </Grid.Column>
-      </Grid.Row>
+      </Grid.Row>,
     ];
   };
 
@@ -121,14 +142,32 @@ class Main extends Component {
 
 
   onSongChanged(event) {
-    console.log(`EVENT: Song was changed!`);
-    event.target.playVideo();
+    if (this.state.autoplay) {
+      event.target.playVideo();
+    }
   }
 
+  getRandomAlbumKey = () => {
+    const albumKeys = Object.keys(albums);
+    const index = Math.floor(Math.random() * albumKeys.length);
+    return albumKeys[index];
+  };
+
+  getRandomWatchId = () => {
+    const albumKey = this.getRandomAlbumKey();
+    const album = art[albumKey];
+    console.log(`Selected random album ${JSON.stringify(album)}`);
+    const songs = album.content;
+    const song = songs[Math.floor(Math.random() * songs.length)];
+    return song.watchid;
+  };
+
+  componentDidMount() {
+    const watchid = this.getRandomWatchId();
+    this.setPlayerSong(watchid, false);
+  };
+
   onStateChange = (event) => {
-    // var embedCode = event.target.getVideoEmbedCode();
-    // event.target.playVideo();
-    // this.setState({playerTarget:event.target});
     try {
       const videoUrl = event.target.getVideoUrl();
       console.log(`Video URL: ${videoUrl}`);
@@ -167,7 +206,7 @@ class Main extends Component {
     const albumSections = (
       <StickyContainer>
         <Grid>
-          <Grid.Row style={{minHeight:playbarHeight*1.2}}>
+          <Grid.Row style={{ minHeight: playbarHeight * 1.2 }}>
           </Grid.Row>
           {Object.keys(albums).map((k, i) => this.renderSection(k, i))}
         </Grid>

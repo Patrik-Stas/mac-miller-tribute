@@ -32,7 +32,7 @@ class AlbumSection extends Component {
         <Grid.Row style={{marginTop:"1em"}}>
           <Grid.Column width={8} id="metadata">
             <h1>{playingSong}</h1>
-            <h2>{(playingReleaseYear) ? `${playingReleaseYear}: `: ''} {playingAlbum}</h2>
+            <h2>{playingAlbum}</h2>
           </Grid.Column>
           <Grid.Column width={8}>
             <YouTube

@@ -16,7 +16,7 @@ class AlbumSection extends Component {
             {songs.map(song => (
               <TableRow key={song.song_name}>
                 <TableCell key={`cell-${song.song_name}`}
-                           onClick={() => onSongClick(song.watchid, album, song.song_name, year)
+                           onClick={() => onSongClick(song.watchid)
                            }
                 >
                   <h5>{song.song_name}</h5>
