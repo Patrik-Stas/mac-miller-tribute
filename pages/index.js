@@ -46,6 +46,38 @@ const albums = {
   singles: [imgSingles],
 };
 
+function orderWatchIds() {
+  let ids = [];
+  const keys = Object.keys(albums);
+  for (let a = 0; a < keys.length; a++) {
+    const album = art[keys[a]];
+    for (let i = 0; i < album.content.length; i++) {
+      const song = album.content[i];
+        ids.push(song.watchid)
+      }
+    }
+  return ids
+}
+
+
+const orderedWatchIds = orderWatchIds();
+console.log(JSON.stringify(orderedWatchIds));
+
+
+function getNextWatchId(watchId) {
+  const i = orderedWatchIds.findIndex((id) => id === watchId);
+  const targetIndex = (i+1 < orderedWatchIds.length) ? i+1 : orderedWatchIds.length-1;
+  return orderedWatchIds[targetIndex]
+}
+
+
+function getPrevWatchId(watchId) {
+  const i = orderedWatchIds.findIndex((id) => id === watchId);
+  const targetIndex = (i-1 >= 0) ? i-1 : 0;
+  return orderedWatchIds[targetIndex]
+}
+
+
 const playbarHeight = 150;
 
 class Main extends Component {
@@ -59,6 +91,7 @@ class Main extends Component {
       playingReleaseYear: '-',
       playerTarget: null,
     };
+
   }
 
   findDetailsByWatchId(searchWatchId) {
@@ -72,6 +105,24 @@ class Main extends Component {
       }
     }
     throw Error(`Couldn't find album where WatchID ${searchWatchId} belongs.`);
+  }
+
+
+  handleArrowKeys(event){
+    switch (event.key) {
+      case "ArrowLeft": {
+        const watchId = getNextWatchId(this.state.loadedWatchId);
+        // console.log(watchId)
+        this.setPlayerSong(watchId);
+        break;
+      }
+      case "ArrowRight": {
+        const watchId = getPrevWatchId(this.state.loadedWatchId);
+        // console.log(watchId)
+        this.setPlayerSong(watchId);
+        break;
+      }
+    }
   }
 
   setPlayerSong = (
@@ -163,9 +214,16 @@ class Main extends Component {
   };
 
   componentDidMount() {
+    document.addEventListener("keydown", this.handleArrowKeys.bind(this), false);
     const watchid = this.getRandomWatchId();
     this.setPlayerSong(watchid, false);
   };
+
+
+  componentWillUnmount(){
+    document.removeEventListener("keydown", this.handleArrowKeys.bind(this), false);
+  }
+
 
   onStateChange = (event) => {
     try {
