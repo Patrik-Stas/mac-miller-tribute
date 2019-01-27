@@ -15,7 +15,7 @@ export default class MyApp extends App {
         const {Component, pageProps} = this.props;
         return (
             <Container>
-                <title>HL Indy Tx Explorer</title>
+                <title>Tribute to Mac Miller</title>
                 <SemanticContainer>
                     <Component {...pageProps}/>
                 </SemanticContainer>

@@ -1,8 +1,17 @@
 {
-  "mackin" : {
+  "mackin": {
     "name": "But My Mackin' Ain't Easy'",
     "type": "mixtape",
     "release_year": "2007",
+    "cite": {
+      "qoute": {
+        "line1" : "And I saw rap, as a way to get away",
+        "line2" : "From everybody tellin' me the day is not my day",
+        "line3" : "My day, my week, my month my year",
+        "line4" : "My tears held back confronted by my fears"
+      },
+      "source": "Smoke Signals"
+    },
     "content": [
       {
         "song_name": "J’s on my feet ",
@@ -42,10 +51,19 @@
       }
     ]
   },
-  "classclown" : {
+  "classclown": {
     "name": "The Jukebox: Prelude to Class Clown",
     "type": "mixtape",
     "release_year": "2009",
+    "cite": {
+      "qoute": {
+        "line1" : "Cuz I'm a goofy dude doin' what I choose to do",
+        "line2" : "Eatin’ tracks up like some snacks call me scooby doo",
+        "line3" : "Now the beat about to drop verse 1",
+        "line4" : "Its like a war when the soldier pull the first gun"
+      },
+      "source": "A Night In The Studio"
+    },
     "content": [
       {
         "song_name": "The Jukebox Intro",
@@ -133,11 +151,20 @@
       }
     ]
   },
-  "highlife" : {
+  "highlife": {
     "name": "The High Life",
     "type": "mixtape",
     "release_year": "2009",
     "release_month": "12",
+    "cite": {
+      "qoute": {
+        "line1" : "The best things in life is the free ones",
+        "line2" : "The little things everybody need some",
+        "line3" : "The finer things make you feel better",
+        "line4" : "But no one ever seem to remember"
+      },
+      "source": "The Finer Things"
+    },
     "content": [
       {
         "song_name": "The High Life - Mac Miller",
@@ -225,11 +252,20 @@
       }
     ]
   },
-  "kids" : {
+  "kids": {
     "name": "K.I.D.S",
     "type": "mixtape",
     "release_year": "2010",
     "release_month": "8",
+    "cite": {
+      "qoute": {
+        "line1" : "This shit right here, feels like a million bucks",
+        "line2" : "Jerm, make sure I'm coming through clear here",
+        "line3" : "Most Dope, what it is",
+        "line4" : "Ladies and gentlemen, you are now in tune to K.I.D.S"
+      },
+      "source": "Kickin Incredibly Dope Shit"
+    },
     "content": [
       {
         "song_name": "Kickin Incredibly Dope Shit (Intro)",
@@ -305,7 +341,18 @@
       }
     ]
   },
-  "bde" : {
+  "bde": {
+    "cite": {
+      "qoute": {
+        "line1" : "No matter where life takes me, find me with a smile",
+        "line2" : "Pursuit to be happy, only laughing like a child",
+        "line3" : "I never thought life would be this sweet",
+        "line4" : "It got me cheesin' from cheek to cheek"
+      },
+      "source": "Best Day Ever",
+      "date": "",
+      "link": ""
+    },
     "name": "Best day ever",
     "type": "mixtape",
     "release_year": "2011",
@@ -377,7 +424,16 @@
       }
     ]
   },
-  "onandon" :{
+  "onandon": {
+    "cite": {
+      "qoute": {
+        "line1" : "Shatter all your dreams",
+        "line2" : "But you gotta get up and go",
+        "line3" : "To bigger better things",
+        "line4" : "Live free, live free, live free, live free"
+      },
+      "source": "Live Free"
+    },
     "name": "On and On and Beyond",
     "type": "album",
     "release_year": "2011",
@@ -385,32 +441,42 @@
     "content": [
       {
         "song_name": "Put It On",
-        "watchid": " 7LSvbLeefJc"
+        "watchid": "7LSvbLeefJc"
       },
       {
         "song_name": "Live Free",
-        "watchid": " 1_GcqfQRY34"
+        "watchid": "1_GcqfQRY34"
       },
       {
         "song_name": "On and On",
-        "watchid": " qah-0nzE2wM"
+        "watchid": "qah-0nzE2wM"
       },
       {
         "song_name": "Life Ain't Easy",
-        "watchid": " B6cwPsjqK0Y"
+        "watchid": "B6cwPsjqK0Y"
       },
       {
         "song_name": "In The Air",
-        "watchid": " n-tCWSr7yJ0"
+        "watchid": "n-tCWSr7yJ0"
       },
       {
         "song_name": "Another Night",
-        "watchid": " HdbOWR2GsLU"
+        "watchid": "HdbOWR2GsLU"
       }
     ]
   },
-  "ilovelife" : {
+  "ilovelife": {
     "name": "I Love Life, Thank You",
+    "cite": {
+      "qoute": {
+        "line1" : "All this money",
+        "line2" : "Spending all this shine",
+        "line3" : "And it’s all so funny",
+        "line4" : "Cause it’s all just fine",
+        "line5" : "I’m feeling better than ever before"
+      },
+      "source": "All this"
+    },
     "type": "mixtape",
     "release_year": "2011",
     "release_month": "11",
@@ -469,7 +535,16 @@
       }
     ]
   },
-  "blueslidepark" : {
+  "blueslidepark": {
+    "cite": {
+      "qoute": {
+        "line1" : "Been high on this incline",
+        "line2" : "Tryna get my money stackin' tall, 6'9",
+        "line3" : "Have some caviar, sip wine",
+        "line4" : "Sacrificin' sanity, sacrificin' normal"
+      },
+      "source": "Of The Soul"
+    },
     "name": "Blue Slide Park ",
     "type": "album",
     "release_year": "2011",
@@ -541,11 +616,20 @@
       }
     ]
   },
-  "macadelic" : {
+  "macadelic": {
     "name": "Macadelic",
     "type": "mixtape",
     "release_year": "2012",
     "release_month": "13",
+    "cite": {
+      "qoute": {
+        "line1" : "We all wanna know what to do in this world",
+        "line2" : "When it seems that there's nothing left",
+        "line3" : "And we dream just to dream",
+        "line4" : "But we don't know exactly how to get there yet"
+      },
+      "source": "Fuck Em All"
+    },
     "content": [
       {
         "song_name": "Love Me As I Have Loved You",
@@ -617,9 +701,18 @@
       }
     ]
   },
-  "watchingmovies" : {
+  "watchingmovies": {
     "name": "Watching Movies with the Sound Off",
     "type": "album",
+    "cite": {
+      "qoute": {
+        "line1" : "Can't decide if you like all the fame",
+        "line2" : "Three years ago to now, it's just not the same",
+        "line3" : "I'm looking out my window ashing on the pane",
+        "line4" : "Shit, wonder if I lost my way"
+      },
+      "source": "The Star Room"
+    },
     "release_year": "2013",
     "content": [
       {
@@ -696,9 +789,18 @@
       }
     ]
   },
-  "delusional" : {
+  "delusional": {
     "name": "Delusional Thomas",
     "type": "Mixtape",
+    "cite": {
+      "qoute": {
+        "line1" : "Exorcist, I need to get some help with this",
+        "line2" : "Once as sweet as Welch's is, I think he went insane though",
+        "line3" : "Must've been the drugs in him, he loved to sniff the yay-yo",
+        "line4" : "If Satan could accompany a halo"
+      },
+      "source": "Halo"
+    },
     "release_year": "2013",
     "release_month": "10",
     "content": [
@@ -744,8 +846,17 @@
       }
     ]
   },
-  "livefromspace" : {
+  "livefromspace": {
     "name": "Live from Space",
+    "cite": {
+      "qoute": {
+        "line1" : "Fun turns to drugs, the idea of cash",
+        "line2" : "Has taken away my mind",
+        "line3" : "And I, think that its' a sign that",
+        "line4" : "Your beauty handed me my mind back"
+      },
+      "source": "Earth"
+    },
     "type": "live album",
     "release_year": "2013",
     "release_month": "12",
@@ -808,7 +919,16 @@
       }
     ]
   },
-  "faces" : {
+  "faces": {
+    "cite": {
+      "qoute": {
+        "line1" : "And I inherited the thirst for self-destruction and I'm scared of it",
+        "line2" : "I wanna be buried with a novel and a chariot",
+        "line3" : "I'm a bigger illusion than good marriages",
+        "line4" : "Or what it means to be American"
+      },
+      "source": "San Francisco"
+    },
     "name": "Faces",
     "type": "mixtape",
     "release_year": "2014",
@@ -912,11 +1032,20 @@
       }
     ]
   },
-  "goodam" : {
+  "goodam": {
     "name": "GO:OD AM",
     "type": "studio album",
     "release_year": "2015",
     "release_month": "9",
+    "cite": {
+      "qoute": {
+        "line1" : "Shooting dice with Jesus Christ, put 20 on the midnight",
+        "line2" : "To everyone who sell me drugs",
+        "line3" : "Don't mix it with that bullshit",
+        "line4" : "I'm hoping not to join the twenty seven club"
+      },
+      "source": "Brand Name"
+    },
     "content": [
       {
         "song_name": "Doors",
@@ -988,11 +1117,22 @@
       }
     ]
   },
-  "divine" : {
+  "divine": {
     "name": "The Divine Feminine",
     "type": "studio album",
     "release_year": "2016",
     "release_month": "9",
+    "cite": {
+      "qoute": {
+        "line1" : "Okay now, baby, don't you leave my side, don't even try",
+        "line2" : "I'mma go crazy, girl, you saved me",
+        "line3" : "Meditate me, get me piece of mind",
+        "line4" : "It's only she and I, ocean floor, how deep we dive",
+        "line5" : "We be high lookin' for another fuckin' tree to climb"
+
+      },
+      "source": "Stay"
+    },
     "content": [
       {
         "song_name": "Congratulations (feat. Bilal)",
@@ -1036,11 +1176,20 @@
       }
     ]
   },
-  "swimming" : {
+  "swimming": {
     "name": "Swimming",
     "type": "studio album",
     "release_year": "2018",
     "release_month": "8",
+    "cite": {
+      "qoute": {
+        "line1" : "Movin' so fast, the clock look slow",
+        "line2" : "Water my seeds 'til the flower just grow, yeah",
+        "line3" : "Love so much that my heart get broke",
+        "line4" : "I don't really know how the normal shit go, so"
+      },
+      "source": "Wings"
+    },
     "content": [
       {
         "song_name": "Come Back To Earth",
@@ -1096,7 +1245,7 @@
       }
     ]
   },
-  "singles" : {
+  "singles": {
     "name": "Singles",
     "type": "single",
     "content": [

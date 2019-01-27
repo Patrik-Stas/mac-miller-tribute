@@ -10,15 +10,14 @@ class AlbumSection extends Component {
     this.state = {};
 
     this.renderSongList = (songs, album, year, onSongClick) => {
-      console.log(`Rendering songs; ${JSON.stringify(songs.length)}`);
       return (
         <Table className="very selectable basic table" style={{ border: 0 }}>
           <TableBody>
             {songs.map(song => (
               <TableRow key={song.song_name}>
                 <TableCell key={`cell-${song.song_name}`}
-                  onClick={() => onSongClick(song.watchid, album, song.song_name, year)
-                  }
+                           onClick={() => onSongClick(song.watchid, album, song.song_name, year)
+                           }
                 >
                   <h5>{song.song_name}</h5>
                 </TableCell>
@@ -38,15 +37,42 @@ class AlbumSection extends Component {
       album,
       year,
       handleSongClick,
+      cite,
     } = this.props;
 
     if (songList === undefined) {
-      throw Error(`${JSON.stringify(this.props)}`)
+      throw Error(`${JSON.stringify(this.props)}`);
     }
 
+
+    const quote = (!!cite && !!cite.qoute && !!cite.qoute.line1) ? [
+      <Grid.Row>
+        <Grid.Column className="album-quote">
+          {cite.qoute.line1}<br/>
+          {cite.qoute.line2}<br/>
+          {cite.qoute.line3}<br/>
+          {cite.qoute.line4}<br/>
+          {(cite.qoute.line5) ? (cite.qoute.line5) : <span/>}
+        </Grid.Column>
+      </Grid.Row>,
+      <Grid.Row textAlign='left'>
+        <Grid.Column floated='right' width={5} className="album-quote-source">
+          {cite.source}
+        </Grid.Column>
+      </Grid.Row>
+
+    ] : <span></span>
     const songGrid = (
-      <Grid.Column width={8} textAlign='center'   style={{top: "10%"}}>
-        <img src={sectionImg} className="album-image" alt="mac_logo" />
+
+      <Grid.Column textAlign='center' width={8} style={{ top: '10%' }}>
+        <Grid>
+          <Grid.Row>
+            <Grid.Column >
+              <img src={sectionImg} className="album-image" alt="mac_logo"/>
+            </Grid.Column>
+          </Grid.Row>
+          { quote }
+        </Grid>
       </Grid.Column>
     );
 
@@ -55,17 +81,15 @@ class AlbumSection extends Component {
         {this.renderSongList(songList, album, year, handleSongClick)}
       </Grid.Column>
     );
-    const gridContent = songsOnLeft
-      ? [imageGrid, songGrid]
-      : [songGrid, imageGrid];
+    const gridContent = [imageGrid, songGrid];
 
     return (
       <div>
-        <div className='album-area' style={{backgroundImage:`url(${sectionImg})`}}>
+        <div className='album-area' style={{ backgroundImage: `url(${sectionImg})` }}>
         </div>
-      <Grid className='album-content'>
-        <Grid.Row>{gridContent}</Grid.Row>
-      </Grid>
+        <Grid className='album-content'>
+          <Grid.Row>{gridContent}</Grid.Row>
+        </Grid>
       </div>
     );
   }

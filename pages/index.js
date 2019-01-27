@@ -27,7 +27,6 @@ const art = require('./data/art.json');
 
 
 const albums = {
-  singles: [imgSingles],
   swimming: [imgSwimming],
   divine: [imgDivine],
   goodam: [imgGoodam],
@@ -44,6 +43,7 @@ const albums = {
   highlife: [imgHighlife],
   classclown: [imgJukebox],
   mackin: [imgMacin],
+  singles: [imgSingles],
 };
 
 const playbarHeight = 150;
@@ -83,11 +83,14 @@ class Main extends Component {
     if (art[albumId].content === undefined) {
       throw Error(`${JSON.stringify(albumId)}`)
     }
-    return (
-      <Grid.Row key={`${albumId}-row`} style={{ minHeight: 400, marginBottom: '4em' }}>
-        <Grid.Column width={16} style={{ marginBottom: '3em' }}>
+    return [
+      <Grid.Row key={`${albumId}-name`} style={{ marginTop: "10em"}}>
+        <Grid.Column width={16} >
           <h1 style={{ fontSize: '3rem'}}>{art[albumId].name}</h1>
         </Grid.Column>
+      </Grid.Row>,
+
+      <Grid.Row key={`${albumId}-row`} style={{ minHeight: 600}}>
         <Grid.Column width={16}>
           <AlbumSection
             key={`${albumId}-album`}
@@ -97,11 +100,12 @@ class Main extends Component {
             songList={art[albumId].content}
             songsOnLeft={true}
             type={art[albumId].type}
+            cite={art[albumId].cite}
             handleSongClick={this.setPlayerSong}
           />
         </Grid.Column>
       </Grid.Row>
-    );
+    ];
   };
 
   onReady = (event) => {
@@ -128,7 +132,7 @@ class Main extends Component {
     try {
       const videoUrl = event.target.getVideoUrl();
       console.log(`Video URL: ${videoUrl}`);
-      const newWatchId = /v=(\w*)/.exec(videoUrl)[1];
+      const newWatchId = /v=(\w*|-|_)/.exec(videoUrl)[1];
       console.log(`WatchId of url ${videoUrl} is = ${JSON.stringify(newWatchId)}`);
       console.log(`targetWatchId = ${this.state.targetWatchId}`);
       console.log(`loadedWatchId = ${this.state.loadedWatchId}`);
