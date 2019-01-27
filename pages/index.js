@@ -53,10 +53,10 @@ function orderWatchIds() {
     const album = art[keys[a]];
     for (let i = 0; i < album.content.length; i++) {
       const song = album.content[i];
-        ids.push(song.watchid)
-      }
+      ids.push(song.watchid);
     }
-  return ids
+  }
+  return ids;
 }
 
 
@@ -65,15 +65,15 @@ const orderedWatchIds = orderWatchIds();
 
 function getNextWatchId(watchId) {
   const i = orderedWatchIds.findIndex((id) => id === watchId);
-  const targetIndex = (i+1 < orderedWatchIds.length) ? i+1 : orderedWatchIds.length-1;
-  return orderedWatchIds[targetIndex]
+  const targetIndex = (i + 1 < orderedWatchIds.length) ? i + 1 : orderedWatchIds.length - 1;
+  return orderedWatchIds[targetIndex];
 }
 
 
 function getPrevWatchId(watchId) {
   const i = orderedWatchIds.findIndex((id) => id === watchId);
-  const targetIndex = (i-1 >= 0) ? i-1 : 0;
-  return orderedWatchIds[targetIndex]
+  const targetIndex = (i - 1 >= 0) ? i - 1 : 0;
+  return orderedWatchIds[targetIndex];
 }
 
 
@@ -120,14 +120,24 @@ class Main extends Component {
     this.setPlayerSong(watchId);
   };
 
-  handleArrowKeys(event){
+  handleArrowKeys(event) {
     switch (event.key) {
-      case "ArrowLeft": {
+      case 'ArrowLeft': {
+        this.playPrev();
+        break;
+      }
+      case 'ArrowRight': {
         this.playNext();
         break;
       }
-      case "ArrowRight": {
+
+      case 'ArrowUp': {
         this.playPrev();
+        break;
+      }
+
+      case 'ArrowDown': {
+        this.playNext();
         break;
       }
     }
@@ -135,7 +145,7 @@ class Main extends Component {
 
   setPlayerSong = (
     targetWatchId,
-    autoplay=true
+    autoplay = true,
   ) => {
     console.log(`Setting player target song to ${targetWatchId}`);
     this.setState({ targetWatchId });
@@ -144,7 +154,7 @@ class Main extends Component {
       console.log(`Found watchId details: ${JSON.stringify(detail)}`);
       this.setState({ playingAlbum: detail.albumName });
       this.setState({ playingSong: detail.songName });
-      this.setState({ autoplay })
+      this.setState({ autoplay });
     } catch (err) {
       console.error(`Couldn't setup details for watchid ${targetWatchId}`);
       console.error(err);
@@ -187,18 +197,18 @@ class Main extends Component {
   };
 
   componentDidMount() {
-    document.addEventListener("keydown", this.handleArrowKeys.bind(this), false);
+    document.addEventListener('keydown', this.handleArrowKeys.bind(this), false);
     const watchid = this.getRandomWatchId();
     this.setPlayerSong(watchid, false);
   };
 
 
-  componentWillUnmount(){
-    document.removeEventListener("keydown", this.handleArrowKeys.bind(this), false);
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleArrowKeys.bind(this), false);
   }
 
   onEnd = (event) => {
-    this.playPrev()
+    this.playPrev();
   };
 
   onStateChange = (event) => {
@@ -278,7 +288,27 @@ class Main extends Component {
           <Grid.Row style={{ minHeight: playbarHeight * 1.2 }}>
           </Grid.Row>
           {Object.keys(albums).map((k, i) => this.renderSection(k, i))}
+          <Grid.Row>
+            <Grid.Column>
+            <Divider/>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row style={{ fontSize: '1.1em' }}>
+            <Grid.Column width={8} floated='left' textAlign='left'>
+              <span>Created by fan <a href="http://patrikstas.com/">Patrik Staš</a>.</span>
+            </Grid.Column>
+            <Grid.Column width={8} floated='right' textAlign='center'>
+              <span>Support this project by downloading using revolutionary web-browser</span>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column width={8} floated='right' textAlign='center'>
+              <a href="https://brave.com/mac042"><img style={{ height: '3em' }}
+                                                      src='/static/brave-bat-partnership.png'/></a>
+            </Grid.Column>
+          </Grid.Row>
         </Grid>
+
 
         <Sticky>{({ style }) =>
           <div style={style}>
