@@ -9,20 +9,27 @@ class AlbumSection extends Component {
     super(props);
     this.state = {};
 
-    this.renderSongList = (songs, album, year, onSongClick) => {
+    this.renderSongRow = (songName, watchId, onClick, isPlaying) => {
+      const rowClass = (isPlaying) ? 'active-song' : '';
+      return (
+        <TableRow className={rowClass} key={watchId} id={watchId}>
+          <TableCell key={`${songName}-table-cell`}
+                     onClick={() => onClick(watchId)
+                     }
+          >
+            <h5>{songName}</h5>
+          </TableCell>
+        </TableRow>
+      );
+    };
+
+    this.renderSongList = (songs, album, year, onClick, nowPlayingWatchId) => {
+
       return (
         <Table className="very selectable basic table" style={{ border: 0 }}>
-          <TableBody>
-            {songs.map(song => (
-              <TableRow key={song.song_name}>
-                <TableCell key={`cell-${song.song_name}`}
-                           onClick={() => onSongClick(song.watchid)
-                           }
-                >
-                  <h5>{song.song_name}</h5>
-                </TableCell>
-              </TableRow>
-            ))}
+          <TableBody> {
+            songs.map(song => this.renderSongRow(song.song_name, song.watchid, onClick, song.watchid === nowPlayingWatchId),
+            )}
           </TableBody>
         </Table>
       );
@@ -38,6 +45,7 @@ class AlbumSection extends Component {
       year,
       handleSongClick,
       cite,
+      loadedWatchId,
     } = this.props;
 
     if (songList === undefined) {
@@ -59,26 +67,26 @@ class AlbumSection extends Component {
         <Grid.Column floated='right' width={5} className="album-quote-source">
           {cite.source}
         </Grid.Column>
-      </Grid.Row>
+      </Grid.Row>,
 
-    ] : <span></span>
+    ] : <span></span>;
     const songGrid = (
 
       <Grid.Column textAlign='center' width={8} style={{ top: '10%' }}>
         <Grid>
           <Grid.Row>
-            <Grid.Column >
+            <Grid.Column>
               <img src={sectionImg} className="album-image" alt="mac_logo"/>
             </Grid.Column>
           </Grid.Row>
-          { quote }
+          {quote}
         </Grid>
       </Grid.Column>
     );
 
     const imageGrid = (
       <Grid.Column width={8}>
-        {this.renderSongList(songList, album, year, handleSongClick)}
+        {this.renderSongList(songList, album, year, handleSongClick, loadedWatchId)}
       </Grid.Column>
     );
     const gridContent = [imageGrid, songGrid];

@@ -2,12 +2,24 @@ import React, { Component } from 'react';
 import YouTube from 'react-youtube';
 import './style.scss';
 import { Grid } from 'semantic-ui-react';
+import Router from "next/dist/lib/router";
+
 
 
 class AlbumSection extends Component {
   constructor(props) {
     super(props);
+  }
 
+  jumpToSong(e) {
+    const foo = `/#${this.props.playingWatchId}`;
+    console.log(`${foo}`)
+    Router.push(foo, foo)
+  }
+
+  jumpToAlbum(e) {
+    const { router } = this.props
+    Router.push('/', '/', { shallow: true })
   }
 
   render() {
@@ -31,14 +43,14 @@ class AlbumSection extends Component {
       <Grid id="playsection" style={{height}}>
         <Grid.Row style={{marginTop:"1em"}}>
           <Grid.Column width={8} id="metadata">
-            <h1>{playingSong}</h1>
+            <h1 onClick={this.jumpToSong.bind(this)}>{playingSong}</h1>
             <h2>{playingAlbum}</h2>
           </Grid.Column>
           <Grid.Column width={8}>
             <YouTube
               videoId={playingWatchId}
-              id={playingWatchId}
-              className="youtubevideo"
+              // id={playingWatchId}
+              // className="youtubevideo"
               containerClassName="videocontainerclass"
               opts={{height:height*0.7, width:"100%"}}
               onReady={onReady}
@@ -57,4 +69,4 @@ class AlbumSection extends Component {
   }
 }
 
-export default AlbumSection;
+export default AlbumSection

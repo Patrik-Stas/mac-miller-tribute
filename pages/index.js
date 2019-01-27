@@ -61,7 +61,6 @@ function orderWatchIds() {
 
 
 const orderedWatchIds = orderWatchIds();
-console.log(JSON.stringify(orderedWatchIds));
 
 
 function getNextWatchId(watchId) {
@@ -78,7 +77,7 @@ function getPrevWatchId(watchId) {
 }
 
 
-const playbarHeight = 150;
+const playbarHeight = 160;
 
 class Main extends Component {
   constructor(props) {
@@ -108,18 +107,27 @@ class Main extends Component {
   }
 
 
+  playNext = () => {
+    const watchId = getNextWatchId(this.state.loadedWatchId);
+    console.log(`Playing next song, watchId: ${watchId}`);
+    this.setPlayerSong(watchId);
+  };
+
+
+  playPrev = () => {
+    const watchId = getPrevWatchId(this.state.loadedWatchId);
+    console.log(`Playing previous song, watchId: ${watchId}`);
+    this.setPlayerSong(watchId);
+  };
+
   handleArrowKeys(event){
     switch (event.key) {
       case "ArrowLeft": {
-        const watchId = getNextWatchId(this.state.loadedWatchId);
-        // console.log(watchId)
-        this.setPlayerSong(watchId);
+        this.playNext();
         break;
       }
       case "ArrowRight": {
-        const watchId = getPrevWatchId(this.state.loadedWatchId);
-        // console.log(watchId)
-        this.setPlayerSong(watchId);
+        this.playPrev();
         break;
       }
     }
@@ -145,40 +153,6 @@ class Main extends Component {
     }
   };
 
-  renderSection = (albumId, index) => {
-    const sectionImg = albums[albumId][0];
-
-    if (art[albumId].content === undefined) {
-      throw Error(`${JSON.stringify(albumId)}`);
-    }
-    return [
-      <Grid.Row key={`${albumId}-name`} style={{ marginTop: '10em' }}>
-        <Grid.Column width={1}>
-          <h3 style={{ fontSize: '2rem' }}>{art[albumId].release_year}</h3>
-        </Grid.Column>
-        <Grid.Column style={{ marginLeft: '1rem' }} width={13}>
-          <h1 style={{ fontSize: '3rem' }}>{art[albumId].name}</h1>
-        </Grid.Column>
-
-      </Grid.Row>,
-
-      <Grid.Row key={`${albumId}-row`} style={{ minHeight: 600 }}>
-        <Grid.Column width={16}>
-          <AlbumSection
-            key={`${albumId}-album`}
-            sectionImg={sectionImg}
-            album={art[albumId].name}
-            year={art[albumId].release_year}
-            songList={art[albumId].content}
-            songsOnLeft={true}
-            type={art[albumId].type}
-            cite={art[albumId].cite}
-            handleSongClick={this.setPlayerSong}
-          />
-        </Grid.Column>
-      </Grid.Row>,
-    ];
-  };
 
   onReady = (event) => {
     var embedCode = event.target.getVideoEmbedCode();
@@ -207,7 +181,6 @@ class Main extends Component {
   getRandomWatchId = () => {
     const albumKey = this.getRandomAlbumKey();
     const album = art[albumKey];
-    console.log(`Selected random album ${JSON.stringify(album)}`);
     const songs = album.content;
     const song = songs[Math.floor(Math.random() * songs.length)];
     return song.watchid;
@@ -224,12 +197,15 @@ class Main extends Component {
     document.removeEventListener("keydown", this.handleArrowKeys.bind(this), false);
   }
 
+  onEnd = (event) => {
+    this.playPrev()
+  };
 
   onStateChange = (event) => {
     try {
       const videoUrl = event.target.getVideoUrl();
       console.log(`Video URL: ${videoUrl}`);
-      const newWatchId = /v=(\w*|-|_)/.exec(videoUrl)[1];
+      const newWatchId = /v=([\w|\-|_]*)/.exec(videoUrl)[1];
       console.log(`WatchId of url ${videoUrl} is = ${JSON.stringify(newWatchId)}`);
       console.log(`targetWatchId = ${this.state.targetWatchId}`);
       console.log(`loadedWatchId = ${this.state.loadedWatchId}`);
@@ -253,6 +229,41 @@ class Main extends Component {
     // }
   };
 
+  renderSection = (albumId, index) => {
+    const sectionImg = albums[albumId][0];
+
+    if (art[albumId].content === undefined) {
+      throw Error(`${JSON.stringify(albumId)}`);
+    }
+    return [
+      <Grid.Row key={`${albumId}-name`} style={{ marginTop: '3em' }}>
+        <Grid.Column width={1}>
+          <h3 style={{ fontSize: '2rem' }}>{art[albumId].release_year}</h3>
+        </Grid.Column>
+        <Grid.Column style={{ marginLeft: '1rem' }} width={13}>
+          <h1 style={{ fontSize: '3rem' }}>{art[albumId].name}</h1>
+        </Grid.Column>
+
+      </Grid.Row>,
+
+      <Grid.Row key={`${albumId}-row`} style={{ minHeight: 700, marginBottom: '7em' }}>
+        <Grid.Column width={16}>
+          <AlbumSection
+            key={`${albumId}-album`}
+            sectionImg={sectionImg}
+            album={art[albumId].name}
+            year={art[albumId].release_year}
+            songList={art[albumId].content}
+            songsOnLeft={true}
+            type={art[albumId].type}
+            cite={art[albumId].cite}
+            loadedWatchId={this.state.loadedWatchId}
+            handleSongClick={this.setPlayerSong}
+          />
+        </Grid.Column>
+      </Grid.Row>,
+    ];
+  };
 
   render() {
     const {
@@ -280,7 +291,7 @@ class Main extends Component {
               onReady={this.onReady}
               // onPlay={this.onPlay}
               // onPause={this.onPause}
-              // onEnd={sthis.onEnd}
+              onEnd={this.onEnd}
               // onError={this.onError}
               onStateChange={this.onStateChange}
               // onPlaybackRateChange={this.onPlaybackRateChange}

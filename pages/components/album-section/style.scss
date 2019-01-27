@@ -1,5 +1,5 @@
 .album-image {
-  height: 300px;
+  height: 400px;
 }
 
 .album-content {
@@ -30,4 +30,8 @@
     font-family: "Times New Roman", serif;
     font-style: oblique;
     font-size: 20px;
+}
+.active-song {
+  background-color:rgba(100, 100, 100, 0.2);
+
 }
