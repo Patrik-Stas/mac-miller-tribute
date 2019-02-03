@@ -4,6 +4,8 @@ import './style.scss';
 import { Grid } from 'semantic-ui-react';
 import Router from 'next/dist/lib/router';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlayCircle, faPauseCircle, faStepForward, faStepBackward} from '@fortawesome/free-solid-svg-icons'
 
 class AlbumSection extends Component {
   constructor(props) {
@@ -39,12 +41,17 @@ class AlbumSection extends Component {
     } = this.props;
     return (
       <Grid className="playsection" style={{ height }}>
-        <Grid.Row style={{ marginTop: '1em' }}>
-          <Grid.Column width={8}>
-            <h1 onClick={this.jumpToSong.bind(this)}>{playingSong}</h1>
-            <h2>{playingAlbum}</h2>
+        <Grid.Row style={{ marginTop: '1em', marginLeft:'3em' }}>
+          <Grid.Column width={6}>
+            <h2 onClick={this.jumpToSong.bind(this)}>{playingSong}</h2>
+            <h4>{playingAlbum}</h4>
           </Grid.Column>
-          <Grid.Column width={8}>
+          <Grid.Column width={3}>
+            <FontAwesomeIcon style={{marginRight:10}} icon={faStepBackward} size='2x' />
+            <FontAwesomeIcon style={{marginRight:10}} icon={faPlayCircle} size='2x' />
+            <FontAwesomeIcon style={{marginRight:10}} icon={faStepForward} size='2x' />
+          </Grid.Column>
+          <Grid.Column width={7}>
             <YouTube
               videoId={playingWatchId}
               // id={playingWatchId}

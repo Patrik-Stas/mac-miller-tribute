@@ -28,22 +28,35 @@ const art = require('./data/art.json');
 
 const albums = {
   swimming: [imgSwimming],
+  selections2018 : [imgSwimming],
   divine: [imgDivine],
+  selections2017 : [imgDivine],
   goodam: [imgGoodam],
+  selections2016 : [imgGoodam],
   faces: [imgFaces],
   livefromspace: [imgFromspace],
+  selections2015 : [imgFromspace],
   delusional: [imgDelusionalthomas],
+  runonsentences1: [imgDelusionalthomas],
   watchingmovies: [imgSoundoff],
+  selections2014 : [imgSoundoff],
+  selections2013 : [imgMacadelic],
   macadelic: [imgMacadelic],
+  you: [imgDivine],
+  selections2012 : [imgMacadelic],
   blueslidepark: [imgBlueslidepark],
+  selections2011 : [imgBlueslidepark],
   ilovelife: [imgIlovelife],
   onandon: [imgOnandon],
+  blackfriday: [imgBde],
   bde: [imgBde],
   kids: [imgKids],
+  piffsburg: [imgKids],
+  selections2010 : [imgKids],
   highlife: [imgHighlife],
   classclown: [imgJukebox],
   mackin: [imgMacin],
-  singles: [imgSingles],
+
 };
 
 function orderWatchIds() {
@@ -51,6 +64,7 @@ function orderWatchIds() {
   const keys = Object.keys(albums);
   for (let a = 0; a < keys.length; a++) {
     const album = art[keys[a]];
+    console.log(`Preprocessing IDs for album ${keys[a]}`);
     for (let i = 0; i < album.content.length; i++) {
       const song = album.content[i];
       ids.push(song.watchid);
@@ -77,7 +91,7 @@ function getPrevWatchId(watchId) {
 }
 
 
-const playbarHeight = 160;
+const playbarHeight = 130;
 
 class Main extends Component {
   constructor(props) {
@@ -246,7 +260,7 @@ class Main extends Component {
       throw Error(`${JSON.stringify(albumId)}`);
     }
     return [
-      <Grid.Row key={`${albumId}-name`} style={{ marginTop: '3em' }}>
+      <Grid.Row key={`${albumId}-name`} style={{ marginTop: '0em' }}>
         <Grid.Column width={1}>
           <h3 style={{ fontSize: '2rem' }}>{art[albumId].release_year}</h3>
         </Grid.Column>
@@ -283,54 +297,61 @@ class Main extends Component {
       targetWatchId,
     } = this.state;
     const albumSections = (
-      <StickyContainer>
+      <div>
         <Grid>
-          <Grid.Row style={{ minHeight: playbarHeight * 1.2 }}>
+          <Grid.Row>
+            <Grid.Column style={{marginTop:'4em'}}>
+              <h1 style={{fontSize:'4em'}}>Tribute to Mac Miller</h1>
+              <h2 style={{}}>The complete discography</h2>
+              <Divider style={{marginBottom:'2em'}}/>
+            </Grid.Column>
           </Grid.Row>
           {Object.keys(albums).map((k, i) => this.renderSection(k, i))}
           <Grid.Row>
             <Grid.Column>
-            <Divider/>
+              <Divider/>
             </Grid.Column>
           </Grid.Row>
           <Grid.Row style={{ fontSize: '1.1em' }}>
             <Grid.Column width={8} floated='left' textAlign='left'>
-              <span>Created by fan <a href="http://patrikstas.com/">Patrik Staš</a>.</span>
+              <h5>Created by fan <a href="http://patrikstas.com/">Patrik Staš</a>.</h5>
             </Grid.Column>
             <Grid.Column width={8} floated='right' textAlign='center'>
-              <span>Support this project by downloading using revolutionary web-browser</span>
+              <h5>Support this project by downloading and using new revolutionary web-browser</h5>
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row>
+          <Grid.Row style={{marginBottom:'4em'}}>
             <Grid.Column width={8} floated='right' textAlign='center'>
               <a href="https://brave.com/mac042"><img style={{ height: '3em' }}
                                                       src='/static/brave-bat-partnership.png'/></a>
             </Grid.Column>
           </Grid.Row>
+          <Grid.Row>
+            <Grid.Column>
+              <Divider/>
+            </Grid.Column>
+          </Grid.Row>
         </Grid>
 
 
-        <Sticky>{({ style }) =>
-          <div style={style}>
-            <TributePlayer
-              height={playbarHeight}
-              playingWatchId={targetWatchId}
-              playingAlbum={playingAlbum}
-              playingSong={playingSong}
-              playingReleaseYear={playingReleaseYear}
-              onReady={this.onReady}
-              // onPlay={this.onPlay}
-              // onPause={this.onPause}
-              onEnd={this.onEnd}
-              // onError={this.onError}
-              onStateChange={this.onStateChange}
-              // onPlaybackRateChange={this.onPlaybackRateChange}
-              // onPlaybackQualityChange={this.onPlaybackQualityChange}
-            />
-            <Divider/>
-          </div>
-        }</Sticky>
-      </StickyContainer>
+        <div className='player-section'>
+          <TributePlayer
+            height={playbarHeight}
+            playingWatchId={targetWatchId}
+            playingAlbum={playingAlbum}
+            playingSong={playingSong}
+            playingReleaseYear={playingReleaseYear}
+            onReady={this.onReady}
+            // onPlay={this.onPlay}
+            // onPause={this.onPause}
+            onEnd={this.onEnd}
+            // onError={this.onError}
+            onStateChange={this.onStateChange}
+            // onPlaybackRateChange={this.onPlaybackRateChange}
+            // onPlaybackQualityChange={this.onPlaybackQualityChange}
+          />
+        </div>
+      </div>
     );
 
     return <div>{albumSections}</div>;

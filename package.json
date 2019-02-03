@@ -13,6 +13,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.13",
+    "@fortawesome/free-solid-svg-icons": "^5.7.0",
+    "@fortawesome/react-fontawesome": "^0.1.4",
     "@zeit/next-sass": "^1.0.1",
     "chart.js": "^2.7.3",
     "date-format": "^2.0.0",
@@ -31,6 +34,7 @@
     "react-dom": "^16.3.2",
     "react-json-pretty": "^2.0.0",
     "react-sticky": "^6.0.3",
+    "react-sticky-footer": "0.1.0-rc3",
     "react-tooltip": "^3.9.2",
     "react-youtube": "^7.9.0",
     "semantic-ui-react": "^0.84.0"
