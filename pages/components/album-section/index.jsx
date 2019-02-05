@@ -13,7 +13,7 @@ class AlbumSection extends Component {
       const rowClass = (isPlaying) ? 'active-song' : '';
       return (
         <TableRow className={rowClass} key={watchId} id={watchId}>
-          <TableCell key={`${songName}-table-cell`}
+          <TableCell style={{cursor:"pointer"}} key={`${songName}-table-cell`}
                      onClick={() => onClick(watchId)
                      }
           >
@@ -39,8 +39,8 @@ class AlbumSection extends Component {
   render() {
     const {
       songList,
-      sectionImg,
-      songsOnLeft,
+      backImg,
+      sideImg,
       album,
       year,
       handleSongClick,
@@ -72,11 +72,11 @@ class AlbumSection extends Component {
     ] : <span></span>;
     const songGrid = (
 
-      <Grid.Column textAlign='center' width={8} style={{ top: '10%' }}>
+      <Grid.Column textAlign='center' width={8} style={{marginTop:"2.5em"}}>
         <Grid>
           <Grid.Row>
             <Grid.Column>
-              <img src={sectionImg} className="album-image" alt="mac_logo"/>
+              {(!!sideImg) && <img src={sideImg} className="album-image" alt="mac_logo"/>}
             </Grid.Column>
           </Grid.Row>
           {quote}
@@ -92,10 +92,10 @@ class AlbumSection extends Component {
     const gridContent = [imageGrid, songGrid];
 
     return (
-      <div>
-        <div className='album-area' style={{ backgroundImage: `url(${sectionImg})` }}>
-        </div>
-        <Grid className='album-content'>
+      <div> {
+        (!!backImg) && <div className='album-area' style={{ backgroundImage: `url(${backImg})` }}/>}
+
+        <Grid className='album-content' style={{marginTop:"2em", marginBottom:"2em", marginLeft:"1em"}}>
           <Grid.Row>{gridContent}</Grid.Row>
         </Grid>
       </div>

@@ -1437,7 +1437,7 @@
     ]
   },
   "selections2018": {
-    "name": "2018 selections",
+    "name": "Selections",
     "type": "selection",
     "release_year": "2018",
     "content": [
@@ -1508,7 +1508,7 @@
     ]
   },
   "selections2017": {
-    "name": "2017 Selections",
+    "name": "Selections",
     "type": "selection",
     "release_year": "2017",
     "content": [
@@ -1543,7 +1543,7 @@
     ]
   },
   "selections2016": {
-    "name": "2016 Selections",
+    "name": "Selections",
     "type": "selection",
     "release_year": "2016",
     "content": [
@@ -1566,7 +1566,7 @@
     ]
   },
   "selections2015": {
-    "name": "2015 Selections",
+    "name": "Selections",
     "type": "selection",
     "release_year": "2015",
     "content": [
@@ -1597,7 +1597,7 @@
     ]
   },
   "selections2014": {
-    "name": "2014 Selections",
+    "name": "Selections",
     "type": "selection",
     "release_year": "2014",
     "content": [
@@ -1632,7 +1632,7 @@
     ]
   },
   "selections2013": {
-    "name": "2013 Selections",
+    "name": "Selections",
     "type": "selection",
     "release_year": "2013",
     "content": [
@@ -1675,7 +1675,7 @@
     ]
   },
   "selections2012": {
-    "name": "2012 Selections",
+    "name": "Selections",
     "type": "selection",
     "release_year": "2012",
     "content": [
@@ -1778,7 +1778,7 @@
     ]
   },
   "selections2011": {
-    "name": "2011 Selections",
+    "name": "Selections",
     "type": "selection",
     "release_year": "2011",
     "content": [
@@ -1865,7 +1865,7 @@
     ]
   },
   "selections2010": {
-    "name": "2010 and earlier selections",
+    "name": "And earlier",
     "type": "mixtape",
     "release_year": "2010",
     "content": [

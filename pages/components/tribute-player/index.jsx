@@ -4,8 +4,14 @@ import './style.scss';
 import { Grid } from 'semantic-ui-react';
 import Router from 'next/dist/lib/router';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlayCircle, faPauseCircle, faStepForward, faStepBackward} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faPlayCircle,
+  faPauseCircle,
+  faStepForward,
+  faStepBackward,
+  faStopCircle,
+} from '@fortawesome/free-solid-svg-icons';
 
 class AlbumSection extends Component {
   constructor(props) {
@@ -38,18 +44,30 @@ class AlbumSection extends Component {
       onPlaybackRateChange,
       onPlaybackQualityChange,
       height,
+      onPrevButtonClick,
+      onPlayButtonClick,
+      onNextButtonClick,
+      onStopButtonClick,
+      isPlayingNow,
     } = this.props;
     return (
       <Grid className="playsection" style={{ height }}>
-        <Grid.Row style={{ marginTop: '1em', marginLeft:'3em' }}>
+        <Grid.Row style={{ marginTop: '1em', marginLeft: '3em' }}>
           <Grid.Column width={6}>
-            <h2 onClick={this.jumpToSong.bind(this)}>{playingSong}</h2>
+            <h2 className="actionable" onClick={this.jumpToSong.bind(this)}>{playingSong}</h2>
             <h4>{playingAlbum}</h4>
           </Grid.Column>
-          <Grid.Column width={3}>
-            <FontAwesomeIcon style={{marginRight:10}} icon={faStepBackward} size='2x' />
-            <FontAwesomeIcon style={{marginRight:10}} icon={faPlayCircle} size='2x' />
-            <FontAwesomeIcon style={{marginRight:10}} icon={faStepForward} size='2x' />
+          <Grid.Column width={3} style={{ marginTop: '1em' }} >
+            <span title="regular tooltip">
+            <FontAwesomeIcon className="actionable" style={{ marginRight: 10 }} onClick={onPrevButtonClick} icon={faStepBackward} size='3x'/>
+            </span>
+            {(isPlayingNow) ? (
+              <FontAwesomeIcon className="actionable"  style={{ marginRight: 10 }} onClick={onStopButtonClick} icon={faStopCircle} size='3x'/>
+            ) : (
+              <FontAwesomeIcon className="actionable"  style={{ marginRight: 10 }} onClick={onPlayButtonClick} icon={faPlayCircle} size='3x'/>
+            )
+            }
+            <FontAwesomeIcon className="actionable"  style={{ marginRight: 10 }} onClick={onNextButtonClick} icon={faStepForward} size='3x'/>
           </Grid.Column>
           <Grid.Column width={7}>
             <YouTube
