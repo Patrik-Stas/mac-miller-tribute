@@ -23,6 +23,7 @@ const imgMacin = '/static/images/macin.jpg';
 const imgOnandon = '/static/images/onandon.jpg';
 const imgSoundoff = '/static/images/soundoff.jpg';
 const imgSwimming = '/static/images/swimming.jpg';
+const imgUnreleased = '/static/images/unreleased.jpg';
 const mac2018 = '/static/images/mac2018.jpg';
 const mac2017= '/static/images/mac2017.jpg';
 const mac2016= '/static/images/mac2016.jpg';
@@ -40,6 +41,11 @@ const art = require('./data/art.json');
 
 
 const albums = {
+  unreleased:
+    {
+      sidePic: null,
+      backPic: imgUnreleased,
+    },
   swimming:
     {
       sidePic: imgSwimming,
