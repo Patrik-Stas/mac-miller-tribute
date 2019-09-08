@@ -3,12 +3,12 @@
 .playsection {
   color: white;
   background-color: black;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";       /* IE 8 */
-  filter: alpha(opacity=90);  /* IE 5-7 */
-  -moz-opacity: 0.9;          /* Netscape */
-  -khtml-opacity: 0.9;        /* Safari 1.x */
+  //-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";       /* IE 8 */
+  //filter: alpha(opacity=90);  /* IE 5-7 */
+  //-moz-opacity: 0.9;          /* Netscape */
+  //-khtml-opacity: 0.9;        /* Safari 1.x */
   opacity: 0.9;               /* Good browsers */
-
+  height: 100%;
 }
 
 .actionable:hover {

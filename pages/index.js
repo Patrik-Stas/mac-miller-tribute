@@ -3,19 +3,18 @@ import '../scss/style.scss';
 import AlbumSection from './components/album-section';
 import TributePlayer from './components/tribute-player';
 import { Divider, Grid } from 'semantic-ui-react';
-import { StickyContainer, Sticky } from 'react-sticky';
 
 // const imgMacMain = require('images/MacMain.jpg');
 const imgBde = '/static/images/bde.jpg';
-const imgSingles = '/static/images/singles.png';
+const imgSingles = '/static/images/singles.jpg';
 const imgBlueslidepark = '/static/images/blueslidepark.jpg';
 const imgDelusionalthomas = '/static/images/delusionalthomas.jpg';
 const imgDivine = '/static/images/divine.jpg';
 const imgFaces = '/static/images/faces.jpg';
 const imgFromspace = '/static/images/fromspace.jpg';
 const imgGoodam = '/static/images/goodam.jpg';
-const imgHighlife = '/static/images/highlife.png';
-const imgIlovelife = '/static/images/ilovelife.png';
+const imgHighlife = '/static/images/highlife.jpg';
+const imgIlovelife = '/static/images/ilovelife.jpg';
 const imgJukebox = '/static/images/jukebox.jpg';
 const imgKids = '/static/images/kids.jpg';
 const imgMacadelic = '/static/images/macadelic.jpg';
@@ -29,7 +28,7 @@ const mac2017= '/static/images/mac2017.jpg';
 const mac2016= '/static/images/mac2016.jpg';
 const mac2015= '/static/images/mac2015.jpg';
 const mac2014= '/static/images/mac2014.jpg';
-const mac2013= '/static/images/mac2013.png';
+const mac2013= '/static/images/mac2013.jpg';
 const mac2012= '/static/images/mac2012.jpg';
 const mac2011= '/static/images/mac2011.jpg';
 const mac2010= '/static/images/mac2010.jpg';
@@ -199,7 +198,7 @@ function orderWatchIds() {
   const keys = Object.keys(albums);
   for (let a = 0; a < keys.length; a++) {
     const album = art[keys[a]];
-    console.log(`Preprocessing IDs for album ${keys[a]}`);
+    // console.log(`Preprocessing IDs for album ${keys[a]}`);
     for (let i = 0; i < album.content.length; i++) {
       const song = album.content[i];
       ids.push(song.watchid);
@@ -240,7 +239,6 @@ class Main extends Component {
       playerTarget: null,
       isPlayingNow: false
     };
-
   }
 
   findDetailsByWatchId(searchWatchId) {
@@ -311,11 +309,9 @@ class Main extends Component {
     targetWatchId,
     autoplay = true,
   ) => {
-    console.log(`Setting player target song to ${targetWatchId}`);
     this.setState({ targetWatchId });
     try {
       const detail = this.findDetailsByWatchId(targetWatchId);
-      console.log(`Found watchId details: ${JSON.stringify(detail)}`);
       this.setState({ playingAlbum: detail.albumName });
       this.setState({ playingSong: detail.songName });
       this.setState({ autoplay });
@@ -387,13 +383,10 @@ class Main extends Component {
   }
 
   onEnd = (event) => {
-    this.playPrev();
+    this.playNext();
   };
 
   onStateChange = (event) => {
-    console.log(`STATE CHANGE!!!`);
-    console.log(event);
-    console.log(event.target.getPlayerState());
     if (event.target.getPlayerState() <= 0 || event.target.getPlayerState() === 2 || event.target.getPlayerState() === 5) {
       this.setState({isPlayingNow:false})
     } else {
@@ -401,16 +394,11 @@ class Main extends Component {
     }
     try {
       const videoUrl = event.target.getVideoUrl();
-      console.log(`Video URL: ${videoUrl}`);
       const newWatchId = /v=([\w|\-|_]*)/.exec(videoUrl)[1];
-      console.log(`WatchId of url ${videoUrl} is = ${JSON.stringify(newWatchId)}`);
-      console.log(`targetWatchId = ${this.state.targetWatchId}`);
-      console.log(`loadedWatchId = ${this.state.loadedWatchId}`);
       if (!newWatchId) {
         console.error(`Couldn't find watchId in URL.`);
       } else {
         if (this.state.loadedWatchId !== newWatchId) {
-          console.log(`ESong was changed! From ${this.state.loadedWatchId} tot ${newWatchId}`);
           this.setState({ loadedWatchId: newWatchId });
           this.onSongChanged(event);
         }
@@ -430,20 +418,18 @@ class Main extends Component {
       throw Error(`${JSON.stringify(albumId)}`);
     }
     return [
-      <Grid.Row key={`${albumId}-name`} style={{ marginTop: '0em' }}>
+      <Grid.Row key={`${albumId}-captions`} style={{ marginTop: '0em' }}>
         <Grid.Column width={1}>
           <h3 style={{ fontSize: '2rem' }}>{art[albumId].release_year}</h3>
         </Grid.Column>
         <Grid.Column style={{ marginLeft: '1rem' }} width={13}>
           <h1 style={{ fontSize: '3rem' }}>{art[albumId].name}</h1>
         </Grid.Column>
-
       </Grid.Row>,
 
-      <Grid.Row key={`${albumId}-row`} style={{ minHeight: 500, marginBottom: '7em' }}>
+      <Grid.Row key={`${albumId}-songlist`} style={{ minHeight: 500, marginBottom: '7em' }}>
         <Grid.Column width={16}>
           <AlbumSection
-            key={`${albumId}-album`}
             backImg={backImg}
             sideImg={sideImg}
             album={art[albumId].name}
@@ -468,7 +454,7 @@ class Main extends Component {
       targetWatchId,
     } = this.state;
     const albumSections = (
-      <div>
+      <div id="my_container">
         <Grid>
           <Grid.Row>
             <Grid.Column style={{ marginTop: '4em' }}>
@@ -486,21 +472,16 @@ class Main extends Component {
           <Grid.Row style={{ fontSize: '1.1em' }}>
             <Grid.Column width={8} floated='left' textAlign='left'>
               <h5>Created by fan <a href="http://patrikstas.com/">Patrik Staš</a>.</h5>
+              <h5>Contribute to project on <a href="https://github.com/Patrik-Stas/mac-miller-tribute">Github</a>.</h5>
             </Grid.Column>
-            <Grid.Column width={8} floated='right' textAlign='center'>
-              <h5>Support this project by downloading and using new revolutionary web-browser</h5>
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row style={{ marginBottom: '1em' }}>
-            <Grid.Column width={8} floated='right' textAlign='center'>
-              <a href="https://brave.com/mac042"><img style={{ height: '3em' }}
-                                                      src='/static/brave-bat-partnership.png'/></a>
+            <Grid.Column width={8} floated='right' textAlign='center' style={{paddingBottom:300}}>
+              <h5>If you like this project, please buy me a coffee! I like cappuccino.</h5>
+              <a href="https://www.buymeacoffee.com/sHSpAQaCo"><img style={{ height: '5em' }}
+                                                                    src='/static/buymeacoffee.png'/></a>
             </Grid.Column>
           </Grid.Row>
         </Grid>
-
-
-        <div className='player-section'>
+        <div id="player-section">
           <TributePlayer
             height={playbarHeight}
             playingWatchId={targetWatchId}

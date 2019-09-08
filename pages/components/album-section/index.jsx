@@ -13,10 +13,7 @@ class AlbumSection extends Component {
       const rowClass = (isPlaying) ? 'active-song' : '';
       return (
         <TableRow className={rowClass} key={watchId} id={watchId}>
-          <TableCell style={{cursor:"pointer"}} key={`${songName}-table-cell`}
-                     onClick={() => onClick(watchId)
-                     }
-          >
+          <TableCell style={{cursor:"pointer"}} onClick={() => onClick(watchId) }>
             <h5>{songName}</h5>
           </TableCell>
         </TableRow>
@@ -53,7 +50,7 @@ class AlbumSection extends Component {
     }
 
 
-    const quote = (!!cite && !!cite.qoute && !!cite.qoute.line1) ? [
+    const quote = (!!cite && !!cite.qoute && !!cite.qoute.line1) ? (
       <Grid.Row>
         <Grid.Column className="album-quote">
           {cite.qoute.line1}<br/>
@@ -67,12 +64,11 @@ class AlbumSection extends Component {
         <Grid.Column floated='right' width={5} className="album-quote-source">
           {cite.source}
         </Grid.Column>
-      </Grid.Row>,
-
-    ] : <span></span>;
+      </Grid.Row>
+    ) : <span></span>;
     const songGrid = (
 
-      <Grid.Column textAlign='center' width={8} style={{marginTop:"2.5em"}}>
+      <Grid.Column key={`${album}-sideimg`} textAlign='center' width={8} style={{marginTop:"2.5em"}}>
         <Grid>
           <Grid.Row>
             <Grid.Column>
@@ -85,16 +81,15 @@ class AlbumSection extends Component {
     );
 
     const imageGrid = (
-      <Grid.Column width={8}>
+      <Grid.Column key={`${album}-songlist`} width={8}>
         {this.renderSongList(songList, album, year, handleSongClick, loadedWatchId)}
       </Grid.Column>
     );
     const gridContent = [imageGrid, songGrid];
 
     return (
-      <div> {
-        (!!backImg) && <div className='album-area' style={{ backgroundImage: `url(${backImg})` }}/>}
-
+      <div key={`${album}-main`}>
+        {(!!backImg) && <div key={`${album}-background`} className='album-area' style={{ backgroundImage: `url(${backImg})` }}/>}
         <Grid className='album-content' style={{marginTop:"2em", marginBottom:"2em", marginLeft:"1em"}}>
           <Grid.Row>{gridContent}</Grid.Row>
         </Grid>

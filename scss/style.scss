@@ -10,15 +10,15 @@ nav {
   }
 }
 
-.player-section {
-  position: sticky;
-  bottom: 0px;
-  right: 0;
-  height: 130px;
+#my_container {
+  //text-align: center
 }
 
-body {
-  -moz-transform: scale(0.75, 0.75); /* Moz-browsers */
-  zoom: 0.75; /* Other non-webkit browsers */
-  zoom: 75%; /* Webkit browsers */
+#player-section {
+  position: fixed;
+  bottom: 0;
+  height: 130px;
+  left: 20%;
+  right: 20%;
+  width: auto;
 }

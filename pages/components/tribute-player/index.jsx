@@ -51,13 +51,13 @@ class AlbumSection extends Component {
       isPlayingNow,
     } = this.props;
     return (
-      <Grid className="playsection" style={{ height }}>
-        <Grid.Row style={{ marginTop: '1em', marginLeft: '3em' }}>
+      <Grid className="playsection" style={{"marginTop":0}}>
+        <Grid.Row style={{marginLeft: '3em', marginRight: '3em', marginTop:'1em' }}>
           <Grid.Column width={6}>
             <h2 className="actionable" onClick={this.jumpToSong.bind(this)}>{playingSong}</h2>
             <h4>{playingAlbum}</h4>
           </Grid.Column>
-          <Grid.Column width={3} style={{ marginTop: '1em' }} >
+          <Grid.Column width={3}>
             <span title="regular tooltip">
             <FontAwesomeIcon className="actionable" style={{ marginRight: 10 }} onClick={onPrevButtonClick} icon={faStepBackward} size='3x'/>
             </span>
